@@ -175,6 +175,52 @@
           <autoReleaseAfterClose>true</autoReleaseAfterClose>
         </configuration>
       </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>3.5.0</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <!-- Main class to be set in the JAR's manifest -->
+              <transformers>
+                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                  <mainClass>gumtree.spoon.AstComparator</mainClass>
+                </transformer>
+              </transformers>
+              <!-- Optional: Relocate packages to avoid conflicts -->
+              <relocations>
+                <relocation>
+                  <pattern>com</pattern> <!-- Match all packages under com -->
+                  <shadedPattern>shadedspoon.com</shadedPattern> <!-- Relocate to shaded.com -->
+                </relocation>
+                <relocation>
+                  <pattern>gumtree</pattern> <!-- Match all packages under com -->
+                  <shadedPattern>shadedspoon.gumtree</shadedPattern> <!-- Relocate to shaded.com -->
+                </relocation>
+              </relocations>
+              <filters>
+                <filter>
+                  <artifact>*:*</artifact>
+                  <excludes>
+                    <exclude>META-INF/LICENSE</exclude>
+                    <exclude>META-INF/LICENSE.txt</exclude>
+                    <exclude>META-INF/MSFTSIG.SF</exclude>
+                    <exclude>META-INF/ECLIPSE_.SF</exclude>
+                    <exclude>META-INF/*.kotlin_module</exclude>
+                  </excludes>
+                </filter>
+              </filters>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
     </plugins>
   </build>
 
