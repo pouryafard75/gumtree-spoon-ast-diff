@@ -203,6 +203,10 @@
                   <pattern>gumtree</pattern> <!-- Match all packages under com -->
                   <shadedPattern>shadedspoon.gumtree</shadedPattern> <!-- Relocate to shaded.com -->
                 </relocation>
+                <relocation>
+                  <pattern>org</pattern> <!-- Match all packages under com -->
+                  <shadedPattern>shadedspoon.org</shadedPattern> <!-- Relocate to shaded.com -->
+                </relocation>
               </relocations>
               <filters>
                 <filter>
